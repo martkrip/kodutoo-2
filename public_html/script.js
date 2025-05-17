@@ -163,9 +163,9 @@ class Typer{
     }
 
     showResults(count){
-        $("#results").html("");
+        $("#staticresults").html("");
         for(let i = 0; i < count; i++){
-            $("#results").append("<div>" + this.allResults[i].name + "" + 
+            $("#staticresults").append("<div>" + this.allResults[i].name + "" + 
                 this.allResults[i].score + 
                 " (" + this.allResults[i].words + ")" + "</div>");
         }
