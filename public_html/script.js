@@ -18,7 +18,7 @@ class Typer{
         this.bonus = 0;
         this.bonusKoef = 200;
         this.resultCount = 10;
-
+        this.typingSpeed = 0;
         this.loadFromFile();
         //this.showResults(this.resultCount);
     }
@@ -145,6 +145,9 @@ class Typer{
         console.log(this.bonus, this.endTime, this.startTime);
         this.score = Math.round((this.endTime - this.startTime + this.bonus) / 1000).toFixed(2);
         $("#score").html(this.score).show();
+        this.typingSpeed = Math.round(this.wordsInGame / ((this.endTime - this.startTime) / 60000));
+        
+        this.displaySpeedImage(this.typingSpeed)
         this.saveResult();
     }
 
@@ -161,13 +164,67 @@ class Typer{
         this.saveToFile();
         this.showResults(this.resultCount);
     }
+    // ChatGPT prompt: Code this out but explain everything
+    displaySpeedImage(typingSpeed){
+        let imagePath = "";
+        let description = "";
 
+        if (typingSpeed <= 20) {
+            imagePath = "images/beginner.png";
+            description = "Beginner";
+        }
+        else if (typingSpeed <= 40) {
+            imagePath = "images/intermediate.png";
+            description = "Average";
+        }
+        else if (typingSpeed <= 60) {
+            imagePath = "images/proficient.png";
+            description = "Proficient";
+        }
+        else if (typingSpeed <= 80) {
+            imagePath = "images/expert.png";
+            description = "Expert";
+        }
+        else {
+            imagePath = "images/master.png";
+            description = "Master";
+        }
+        // clears previous image
+        $("#speedImage").html("");
+
+        // adds the new image with a description
+        $("#speedImage").append(`
+            <div class="speed-result">
+                <p>Sinu typing level: <strong>${description}</strong></p>
+            <img src="${imagePath}" alt="${description}" style="max-width: 150px;">
+        </div>
+        `)
+    }
+
+    // ChatGPT promptiga: Give me an example on how to do 3. assignment
     showResults(count){
-        $("#staticresults").html("");
+        const resultsDiv = $("#staticresults");
+        resultsDiv.html("");
+        // adds table header
+        resultsDiv.append(`
+            <div class="result-header">
+                <span>Name</span>
+                <span>Punktid (s)</span>
+                <span>Sõnad</span>
+                <span>
+            </div>
+            `);
         for(let i = 0; i < count; i++){
-            $("#staticresults").append("<div>" + this.allResults[i].name + "" + 
-                this.allResults[i].score + 
-                " (" + this.allResults[i].words + ")" + "</div>");
+            const result = this.allResults[i];
+
+            const resultHTML= `
+            <div class="result-row">
+                <span>${result.name}</span>
+                <span>${result.score}</span>
+                <span>${result.words}</span>
+            </div>
+            `;
+            resultsDiv.append(resultHTML);
         }
     }
     saveToFile(){

@@ -1,1 +1,10 @@
-{"content": [{"name":"Martin","score":"3.94"}]}
+{
+    "content": 
+    [
+    {
+    "name":"Martin",
+    "score":"3.94",
+    "words": "5"
+    }
+    ]
+}
