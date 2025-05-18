@@ -165,29 +165,30 @@ class Typer{
         this.showResults(this.resultCount);
     }
     // ChatGPT prompt: Code this out but explain everything
+    // Kasutasin ka seda veebileht https://www.typingpal.com/en/blog/good-typing-speed
     displaySpeedImage(typingSpeed){
         let imagePath = "";
         let description = "";
 
         if (typingSpeed <= 20) {
             imagePath = "images/beginner.png";
-            description = "Beginner";
+            description = "Algaja";
         }
         else if (typingSpeed <= 40) {
             imagePath = "images/intermediate.png";
-            description = "Average";
+            description = "Keskmine";
         }
         else if (typingSpeed <= 60) {
             imagePath = "images/proficient.png";
-            description = "Proficient";
+            description = "Pädev";
         }
         else if (typingSpeed <= 80) {
             imagePath = "images/expert.png";
-            description = "Expert";
+            description = "Ekspert";
         }
         else {
             imagePath = "images/master.png";
-            description = "Master";
+            description = "Meister :)";
         }
         // clears previous image
         $("#speedImage").html("");
@@ -195,7 +196,7 @@ class Typer{
         // adds the new image with a description
         $("#speedImage").append(`
             <div class="speed-result">
-                <p>Sinu typing level: <strong>${description}</strong></p>
+                <p>Sinu trükkimise tase: <strong>${description}</strong></p>
             <img src="${imagePath}" alt="${description}" style="max-width: 150px;">
         </div>
         `)
